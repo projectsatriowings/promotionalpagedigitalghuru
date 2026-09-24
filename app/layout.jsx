@@ -9,6 +9,7 @@ export const viewport = {
 };
 
 export const metadata = {
+  metadataBase: new URL('https://digitalghuru.in'),
   title: 'Digital Marketing AI Tools Workshop | Digital Ghuru',
   description: 'Join Digital Ghuru\'s exclusive AI-powered digital marketing workshop for colleges. Learn to automate workflows, create smarter campaigns, and future-proof your career with cutting-edge AI tools.',
   keywords: ['Digital Marketing', 'AI Workshop', 'Digital Ghuru', 'AI Tools', 'Marketing Automation', 'College Workshop', 'Chennai', 'Career Transformation', 'Generative AI for Marketing'],

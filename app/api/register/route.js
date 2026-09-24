@@ -9,10 +9,11 @@ const pool = new Pool({
 });
 
 export async function POST(req) {
+  let client;
   try {
     const { name, phone, email, status, interest, ticketId } = await req.json();
 
-    const client = await pool.connect();
+    client = await pool.connect();
     
     // Create table if not exists
     await client.query(`
@@ -39,11 +40,11 @@ export async function POST(req) {
       [name, phone, email, status, interest, ticketId]
     );
 
-    client.release();
-
     return NextResponse.json({ success: true, id: result.rows[0].id }, { status: 200 });
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  } finally {
+    if (client) client.release();
   }
 }
