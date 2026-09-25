@@ -9,10 +9,11 @@ const pool = new Pool({
 });
 
 export async function POST(req) {
+  let client;
   try {
     const { pathname } = await req.json();
 
-    const client = await pool.connect();
+    client = await pool.connect();
     
     // Create table if not exists
     await client.query(`
@@ -29,11 +30,11 @@ export async function POST(req) {
       [pathname]
     );
 
-    client.release();
-
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error('Tracking error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  } finally {
+    if (client) client.release();
   }
 }

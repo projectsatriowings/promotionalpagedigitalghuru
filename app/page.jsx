@@ -246,7 +246,7 @@ export default function Home() {
         currency: order.currency,
         name: "Digital Ghuru",
         description: "AI Workshop Registration",
-        image: "/assets/favicon-cropped.png",
+        image: "/assets/favicon-optimized.png",
         order_id: order.id, 
         handler: async function (response) {
           // Send automated email via backend
