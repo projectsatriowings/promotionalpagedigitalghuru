@@ -349,12 +349,12 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
   const faqs = [
-    ['Who can attend?', 'Students from every department can join - including arts, science, commerce, management, media and engineering. No prior marketing or technical knowledge is needed.', UserProfileIcon],
-    ['Will students get a certificate?', 'Yes. Every participant receives a Workshop Participation Certificate after completing the program.', GraduationCapIcon],
+    ['Who can attend?', 'Anyone with a curiosity for AI and marketing can join - including working professionals, business owners, and students from any department. No prior marketing or technical knowledge is needed.', UserProfileIcon],
+    ['Will I get a certificate?', 'Yes. Every participant receives a Workshop Participation Certificate after completing the program.', GraduationCapIcon],
     ['Is this a theory-only session?', 'No. The workshop is built around live demonstrations, real-time examples, hands-on exercises and practical AI workflows.', QuestionCircleIcon],
     ['Can institutions or individuals join?', 'Absolutely. This workshop is specially designed for educational institutions, professionals, and individuals who want to build future-ready skills.', DocumentIcon],
-    ['Do students need to bring their own laptops?', 'While not mandatory, we highly recommend bringing a laptop to fully participate in the hands-on AI tool demonstrations and exercises.', LaptopIcon],
-    ['How long is the workshop session?', 'The workshop typically runs for an immersive 4-hour session, divided into foundational concepts and practical, hands-on application segments.', ClockIcon],
+    ['Do attendees need to bring their own laptops?', 'While not mandatory, we highly recommend bringing a laptop to fully participate in the hands-on AI tool demonstrations and exercises.', LaptopIcon],
+    ['How long is the workshop session?', 'The workshop typically runs for an immersive 3-hour session, divided into foundational concepts and practical, hands-on application segments.', ClockIcon],
     ['Is there any software prerequisite?', 'No special software installation is required. All AI marketing tools demonstrated are web-based and accessible via any standard modern browser.', MonitorIcon]
   ];
   return <main>
@@ -379,64 +379,138 @@ export default function Home() {
 
     <section className="section promise"><Reveal><div className="label-block">THE WORKSHOP<br/>PROMISE <Spark/></div></Reveal><Reveal><h2>Not another lecture.<br/><em>A launchpad.</em></h2><p className="lede">A beginner-friendly, high-energy experience where you see AI in action, make things yourself and discover where your skills can take you. From first prompt to finished marketing creative, every session gives learners a clear sense of what modern work feels like.</p></Reveal><Reveal className="promise-art"><img src="/assets/workshop_promises_image.png" alt="Digital marketing AI workshop visual"/><span className="image-note">Ideas become<br/><b>work people see.</b></span></Reveal></section>
 
-    <section className="section audience"><Reveal className="audience-photo"><img src="/assets/whos_for_it_image.png" alt="AI workshop programme"/></Reveal><Reveal className="chips"><span>Working Professionals</span><span>Students</span><span>Business Owners</span><span>Entrepreneurs</span><p>No experience required - just an appetite for what’s next.</p></Reveal><Reveal className="audience-title-block"><p className="eyebrow">made for everyone</p><h2>One room.<br/><em>Every discipline.</em></h2><p className="audience-intro">People from science, commerce, arts, management and technology bring different perspectives. AI gives them a shared creative language.</p></Reveal></section>
+    <section id="audience" className="section combined-audience" style={{ background: '#fafcff', padding: '100px 5vw' }}>
+      <div style={{ textAlign: 'left', width: '100%', maxWidth: '1400px', margin: '0 auto 60px auto' }}>
+        <Reveal>
+          <p className="eyebrow orange" style={{ marginBottom: '16px' }}>MADE FOR EVERYONE</p>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'var(--ink)', fontWeight: '800', letterSpacing: '-0.02em', margin: 0 }}>Who Should <em style={{ color: 'var(--orange)', fontStyle: 'normal' }}>Attend?</em></h2>
+          <p style={{ color: '#526b92', maxWidth: '650px', margin: '20px 0 0', fontSize: '1.15rem', lineHeight: '1.6' }}>People from science, commerce, arts, management and technology bring different perspectives. AI gives them a shared creative language.</p>
+        </Reveal>
+      </div>
 
-    <section id="agenda" className="section agenda"><Reveal><p className="eyebrow orange">your learning arc</p><h2>Two days. Seven<br/><em>future-forward</em> sessions.</h2></Reveal><div className="days"><div className="day blue"><Reveal className="day-num from-left">01</Reveal><Reveal className="from-bottom"><p className="day-kicker">DAY ONE · FOUNDATIONS</p><h3>Understand the new marketing playbook.</h3><ul><li>Digital Marketing essentials</li><li>AI in modern marketing</li><li>AI content creation tools</li><li>AI design tools & creative workflows</li></ul></Reveal><div className="day-image"><Reveal className="from-right"><img src="/assets/day_1_image.png" alt="Day 1 image"/></Reveal></div></div><div className="day gold"><div></div><Reveal className="from-top"><p className="day-kicker">DAY TWO · MOMENTUM</p><h3>Create, share and see where it can lead.</h3><ul><li>AI video tools demo</li><li>Social media marketing with AI</li><li>Careers, freelancing & entrepreneurship</li></ul></Reveal><Reveal className="day-num from-right" style={{textAlign: 'right'}}>02</Reveal><div className="day-image"><Reveal className="from-left"><img src="/assets/day_2_image.png" alt="Day 2 image"/></Reveal></div></div></div></section>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4vw', alignItems: 'center', maxWidth: '1400px', margin: '0 auto', justifyContent: 'flex-start' }}>
+        
+        <Reveal className="audience-photo" style={{ flex: '1 1 400px', margin: 0, minWidth: '300px' }}>
+          <img src="/assets/whos_for_it_image.png" alt="AI workshop programme" style={{ width: '100%', maxWidth: '500px', height: 'auto', display: 'block', margin: '0 auto' }}/>
+        </Reveal>
+
+        <div style={{ flex: '2 1 600px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+          {/* Card 1 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>Working Professionals</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Break through creative blocks and automate daily tasks. Learn how generative AI helps you produce high-quality work in half the time.</p>
+            </div>
+          </Reveal>
+
+          {/* Card 2 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>IT & Software Professionals</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Move beyond code. Understand how modern marketing teams leverage AI tools to build better integrations and automate cross-functional workflows.</p>
+            </div>
+          </Reveal>
+
+          {/* Card 3 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>Managers & Team Leaders</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Discover how to scale your team's marketing output without increasing headcount by building reliable, AI-driven content pipelines.</p>
+            </div>
+          </Reveal>
+
+          {/* Card 4 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><circle cx="12" cy="8" r="5"></circle><path d="M3 21v-2a7 7 0 0 1 14 0v2"></path><circle cx="19" cy="12" r="3"></circle><path d="M22 21v-2a4 4 0 0 0-2-3.87"></path></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>Sales, Marketing & Operations</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Supercharge your campaigns. Automate social media, personalized outreach, and design tasks to deliver better results instantly.</p>
+            </div>
+          </Reveal>
+
+          {/* Card 5 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>Consultants, Trainers & Freelancers</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Expand your service offerings by integrating AI creation tools. Deliver premium marketing assets to your clients at lightning speed.</p>
+            </div>
+          </Reveal>
+
+          {/* Card 6 */}
+          <Reveal>
+            <div className="audience-card" style={{ background: '#fff', padding: '32px 28px', borderRadius: '24px', border: '1px solid #f1f5f9', textAlign: 'left', height: '100%', boxShadow: '0 4px 20px rgba(9, 36, 92, 0.03)', transition: 'all 0.3s ease' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px' }}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--ink)', marginBottom: '12px', fontWeight: '700' }}>Career Builders & AI Learners</h3>
+              <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', margin: 0 }}>Build a future-proof portfolio. Master generative design and AI content strategies to stand out in the modern job market.</p>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+
+    <section id="agenda" className="section agenda"><Reveal><p className="eyebrow orange">your learning arc</p><h2>One day. Two<br/><em>future-forward</em> batches.</h2></Reveal><div className="days"><div className="day blue"><Reveal className="day-num from-left">01</Reveal><Reveal className="from-bottom"><p className="day-kicker">BATCH 01 · FOUNDATIONS</p><h3>Understand the new marketing playbook.</h3><ul><li>Digital Marketing essentials</li><li>AI in modern marketing</li><li>AI content creation tools</li><li>AI design tools & creative workflows</li></ul></Reveal><div className="day-image"><Reveal className="from-right"><img src="/assets/day_1_image.png" alt="Day 1 image"/></Reveal></div></div><div className="day gold"><div></div><Reveal className="from-top"><p className="day-kicker">BATCH 02 · MOMENTUM</p><h3>Create, share and see where it can lead.</h3><ul><li>AI video tools demo</li><li>Social media marketing with AI</li><li>Careers, freelancing & entrepreneurship</li></ul></Reveal><Reveal className="day-num from-right" style={{textAlign: 'right'}}>02</Reveal><div className="day-image"><Reveal className="from-left"><img src="/assets/day_2_image.png" alt="Day 2 image"/></Reveal></div></div></div></section>
 
     <section className="method"><Reveal className="method-copy-overlay"><div className="method-copy"><p className="eyebrow">learn by doing</p><h2>Watch it.<br/>Try it.<br/><em>Own it.</em></h2></div></Reveal><div className="method-text-column"><div className="method-cards"><Reveal className="from-left" style={{height: '100%'}}><article><span>01</span><h3>Live tool demos</h3><p>See the workflows behind content, design, video and social in real time.</p></article></Reveal><Reveal className="from-top" style={{height: '100%'}}><article><span>02</span><h3>Guided making</h3><p>Turn prompts and ideas into tangible marketing creative.</p></article></Reveal><Reveal className="from-right" style={{height: '100%'}}><article><span>03</span><h3>Career context</h3><p>Connect new skills with the opportunities shaping the world of work.</p></article></Reveal></div></div><Reveal className="method-image-column from-bottom" style={{height: '100%'}}><div className="method-image"><img src="/assets/hands_on_method_image.png" alt="Hands on method"/></div></Reveal></section>
 
     <section id="outcomes" className="section outcomes">
       {/* Original Outcomes */}
       <Reveal>
-        <p className="eyebrow orange">what leaves with them</p>
-        <h2>More than notes.<br/><em>Real momentum.</em></h2>
+        <div style={{ textAlign: 'left', marginBottom: '40px', width: '100%' }}>
+          <p className="eyebrow orange" style={{ marginBottom: '16px' }}>CURRICULUM</p>
+          <h2 style={{ margin: '0 0 16px 0', textAlign: 'left' }}>What You'll Learn in<br/><em>3 Hours</em></h2>
+          <p style={{ color: '#526b92', fontSize: '1.15rem', maxWidth: '800px', lineHeight: '1.5', margin: '0', textAlign: 'left' }}>A power-packed, hands-on curriculum designed for real results - not theory.</p>
+        </div>
       </Reveal>
       <div className="outcome-grid">
         <Reveal>
           <div className="outcome">
             <span>01</span>
-            <h3>AI tool awareness</h3>
-            <p>Know the tools transforming marketing teams today.</p>
+            <h3>Generative AI & Agents</h3>
+            <p>Master the fundamentals of Generative AI, AI Agents, and Agentic AI.</p>
             <b>✦</b>
           </div>
         </Reveal>
         <Reveal>
           <div className="outcome">
             <span>02</span>
-            <h3>Basic marketing knowledge</h3>
-            <p>Practical exposure you can build on.</p>
+            <h3>Automate Workflows</h3>
+            <p>Create AI-powered workflows that automate real-world tasks.</p>
             <b>✦</b>
           </div>
         </Reveal>
         <Reveal>
           <div className="outcome">
             <span>03</span>
-            <h3>Creative confidence</h3>
-            <p>Practical exposure you can build on.</p>
+            <h3>System Integrations</h3>
+            <p>Connect AI Agents with your favorite tools, apps, and business systems.</p>
             <b>✦</b>
           </div>
         </Reveal>
         <Reveal>
           <div className="outcome">
             <span>04</span>
-            <h3>Career guidance</h3>
-            <p>Practical exposure you can build on.</p>
+            <h3>Real-World Solutions</h3>
+            <p>Design and deploy AI solutions for real-world business use cases.</p>
             <b>✦</b>
           </div>
         </Reveal>
         <Reveal>
           <div className="outcome">
             <span>05</span>
-            <h3>Future-ready digital skills</h3>
-            <p>Practical exposure you can build on.</p>
+            <h3>Prompt Engineering</h3>
+            <p>Master modern Generative AI tools and Prompt Engineering techniques.</p>
             <b>✦</b>
           </div>
         </Reveal>
         <Reveal>
           <div className="outcome">
             <span>06</span>
-            <h3>Participation certificate</h3>
-            <p>Practical exposure you can build on.</p>
+            <h3>Industry Case Studies</h3>
+            <p>Discover how leading companies build and deploy AI-powered solutions.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -721,86 +795,63 @@ export default function Home() {
           </div>
         </Reveal>
 
-        {/* Right Column: Multi-layered Photo Collage with Placeholders */}
-        <Reveal className="why-choose-right">
-          <div className="why-collage-wrapper">
-            {/* Background decorative circle */}
-            <div className="why-bg-circle" aria-hidden="true"></div>
+        <Reveal className="why-choose-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="premium-trainers-section" style={{ display: 'flex', flexWrap: 'nowrap', width: '100%', maxWidth: '650px', margin: '0 auto', justifyContent: 'center', gap: '4vw', alignItems: 'center' }}>
+              
+              {/* Bala Card */}
+              <div className="trainer-card" style={{ 
+                  background: '#fff', 
+                  borderRadius: '24px', 
+                  boxShadow: '0 20px 50px rgba(9,36,92,0.08)', 
+                  border: '1px solid #eef2f6', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  overflow: 'hidden',
+                  flex: '1 1 0',
+                  minWidth: 0,
+                  transform: 'translateY(-30px)',
+                  transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={e => e.currentTarget.style.transform = 'translateY(-40px) scale(1.02)'} 
+                onMouseOut={e => e.currentTarget.style.transform = 'translateY(-30px)'}
+              >
+                <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#f8fafc' }}>
+                  <img src="/assets/Bala Sir.jpeg" alt="Bala" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 10%' }} />
+                </div>
+                <div style={{ padding: '20px', textAlign: 'left' }}>
+                  <h4 style={{ margin: '0 0 6px', fontSize: 'clamp(18px, 2vw, 24px)', fontWeight: '800', color: 'var(--ink)' }}>Bala</h4>
+                  <p style={{ margin: 0, fontSize: 'clamp(10px, 1.2vw, 13px)', fontWeight: '800', color: 'var(--blue)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Digital Marketing Trainer</p>
+                </div>
+              </div>
 
-            {/* Background dot matrix grid */}
-            <svg className="why-dot-matrix" width="80" height="120" viewBox="0 0 80 120" fill="none" aria-hidden="true">
-              <defs>
-                <pattern id="whyDotPattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="3" cy="3" r="2" fill="#94a3b8" />
-                </pattern>
-              </defs>
-              <rect width="80" height="120" fill="url(#whyDotPattern)" />
-            </svg>
+              {/* Prakash Card */}
+              <div className="trainer-card" style={{ 
+                  background: '#fff', 
+                  borderRadius: '24px', 
+                  boxShadow: '0 20px 50px rgba(9,36,92,0.08)', 
+                  border: '1px solid #eef2f6', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  overflow: 'hidden',
+                  flex: '1 1 0',
+                  minWidth: 0,
+                  transform: 'translateY(30px)',
+                  transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  cursor: 'pointer'
+                }}
+                onMouseOver={e => e.currentTarget.style.transform = 'translateY(20px) scale(1.02)'} 
+                onMouseOut={e => e.currentTarget.style.transform = 'translateY(30px)'}
+              >
+                <div style={{ width: '100%', aspectRatio: '1/1', overflow: 'hidden', background: '#f8fafc' }}>
+                  <img src="/assets/Prakash Sir.jpeg" alt="Prakash" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%', transform: 'scale(1.22)' }} />
+                </div>
+                <div style={{ padding: '20px', textAlign: 'left' }}>
+                  <h4 style={{ margin: '0 0 6px', fontSize: 'clamp(18px, 2vw, 24px)', fontWeight: '800', color: 'var(--ink)' }}>Prakash</h4>
+                  <p style={{ margin: 0, fontSize: 'clamp(10px, 1.2vw, 13px)', fontWeight: '800', color: '#c79a00', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Digital Marketing Trainer</p>
+                </div>
+              </div>
 
-          <div className="why-collage-wrapper">
-            <div className="why-bg-circle"></div>
-            <svg className="why-dot-matrix" viewBox="0 0 80 120">
-              <defs>
-                <pattern id="whyDotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="2" fill="#09245c" />
-                </pattern>
-              </defs>
-              <rect width="80" height="120" fill="url(#whyDotPattern)" />
-            </svg>
-
-            {/* Bala Sir - Top Left */}
-            <div className="why-photo-card photo-student-1" style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="teacher-photo-wrap" style={{ flex: 1, overflow: 'hidden' }}>
-                <img 
-                  src="/assets/Bala Sir.jpeg" 
-                  alt="Bala Sir" 
-                  className="why-img"
-                />
-              </div>
-              <div className="teacher-badge-bar" style={{ background: 'var(--blue)' }}>
-                <h4 className="teacher-name" style={{ color: 'var(--gold)' }}>Bala Sir</h4>
-                <span className="teacher-role" style={{ color: 'var(--gold)', fontWeight: '800', fontSize: '14px' }}>Digital Marketing Trainer</span>
-              </div>
-            </div>
-
-            {/* Prakash Sir - Center Floating */}
-            <div className="why-teacher-card">
-              <div className="teacher-call-pill">
-                <span className="call-icon-dot dot-video">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#6366f1"><path d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-                </span>
-                <span className="call-icon-dot dot-phone">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="#10b981"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.4-1.1-.6-2.3-.6-3.5 0-.6-.4-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1z"/></svg>
-                </span>
-              </div>
-              <div className="teacher-photo-wrap">
-                <img 
-                  src="/assets/Prakash Sir.jpeg" 
-                  alt="Prakash Sir" 
-                  className="why-img"
-                />
-              </div>
-              <div className="teacher-badge-bar" style={{ background: 'var(--gold)' }}>
-                <h4 className="teacher-name" style={{ color: 'var(--ink)' }}>Prakash Sir</h4>
-                <span className="teacher-role" style={{ color: 'var(--ink)', fontWeight: '800', fontSize: '14px' }}>Digital Marketing Trainer</span>
-              </div>
-            </div>
-
-            {/* Soorya Sir - Bottom Right */}
-            <div className="why-photo-card photo-student-2" style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className="teacher-photo-wrap" style={{ flex: 1, overflow: 'hidden' }}>
-                <img 
-                  src="/assets/Soorya Sir.jpeg" 
-                  alt="Soorya Sir" 
-                  className="why-img"
-                />
-              </div>
-              <div className="teacher-badge-bar" style={{ background: 'var(--orange)' }}>
-                <h4 className="teacher-name">Soorya Sir</h4>
-                <span className="teacher-role" style={{ fontWeight: '800', fontSize: '14px' }}>Graphic Designer &amp; Video Editing Trainer</span>
-              </div>
-            </div>
-          </div>
           </div>
         </Reveal>
       </div>
@@ -813,10 +864,10 @@ export default function Home() {
         <svg className="bg-icon bg-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>
       </div>
       <Reveal>
-        <p className="eyebrow orange">save the dates</p>
+        <p className="eyebrow orange">save the date</p>
         <h2>Give yourself<br/>a head start on <em>tomorrow.</em></h2>
         <p className="lede" style={{ color: '#dce9ff', marginTop: '20px', maxWidth: '420px', fontSize: '18px', lineHeight: '1.5' }}>
-          Secure your spot for two days of high-impact learning. Master the AI tools shaping the future of digital marketing and walk away with a portfolio of real-world projects.
+          Secure your spot for a day of high-impact learning. Master the AI tools shaping the future of digital marketing and walk away with a portfolio of real-world projects.
         </p>
         <div style={{ marginTop: '35px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontSize: '15px', fontWeight: '600' }}>
@@ -1011,19 +1062,7 @@ export default function Home() {
                             <span className="select-chevron">▾</span>
                           </div>
                         </label>
-                        <label>
-                          <span>AI CAREER INTEREST</span>
-                          <div className="select-wrapper">
-                            <select required value={formData.interest} onChange={(e) => setFormData({...formData, interest: e.target.value})}>
-                              <option value="" disabled>What are you looking to learn?</option>
-                              <option value="marketing">AI in Marketing & Social Media</option>
-                              <option value="design">AI for Design & Creativity</option>
-                              <option value="tech">Technical / Development</option>
-                              <option value="general">General Productivity</option>
-                            </select>
-                            <span className="select-chevron">▾</span>
-                          </div>
-                        </label>
+
                         <label>
                           <span>SELECT BATCH</span>
                           <div className="select-wrapper">
@@ -1181,36 +1220,34 @@ export default function Home() {
           </div>
         </Reveal>
 
-        <div className="faq-cards-container">
+        <Reveal className="faq-cards-container">
           {faqs.map(([q, a, IconComponent], i) => (
-            <Reveal key={q}>
-              <div className={`faq-card-item ${open === i ? 'open' : ''}`}>
-                <button
-                  className="faq-card-btn"
-                  onClick={() => setOpen(open === i ? null : i)}
-                  aria-expanded={open === i}
-                >
-                  <div className="faq-card-left">
-                    <div className="faq-type-badge">
-                      <IconComponent />
-                    </div>
-                    <span className="faq-card-q">{q}</span>
+            <div key={q} className={`faq-card-item ${open === i ? 'open' : ''}`}>
+              <button
+                className="faq-card-btn"
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+              >
+                <div className="faq-card-left">
+                  <div className="faq-type-badge">
+                    <IconComponent />
                   </div>
-                  <div className="faq-card-chevron">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points={open === i ? "18 15 12 9 6 15" : "6 9 12 15 18 9"} />
-                    </svg>
-                  </div>
-                </button>
-                {open === i && (
-                  <div className="faq-card-answer">
-                    <p>{a}</p>
-                  </div>
-                )}
-              </div>
-            </Reveal>
+                  <span className="faq-card-q">{q}</span>
+                </div>
+                <div className="faq-card-chevron">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points={open === i ? "18 15 12 9 6 15" : "6 9 12 15 18 9"} />
+                  </svg>
+                </div>
+              </button>
+              {open === i && (
+                <div className="faq-card-answer">
+                  <p>{a}</p>
+                </div>
+              )}
+            </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
 

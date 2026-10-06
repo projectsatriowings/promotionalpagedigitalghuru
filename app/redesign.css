@@ -1530,6 +1530,9 @@ label { font-size: 14px; }
   display: flex;
   flex-direction: column;
   gap: 16px;
+  justify-content: flex-start;
+  height: fit-content;
+  align-self: flex-start;
 }
 
 .faq-card-item {
@@ -2675,4 +2678,49 @@ h3 { font-size: 1.3rem !important; line-height: 1.2 !important; }
   left: 50%; 
   transform: translateX(-50%); 
   box-shadow: none !important; 
+}
+
+/* Trainer Collage Overrides for responsive layout */
+.why-collage-wrapper {
+  height: auto !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+  padding: 40px 0 !important;
+  justify-content: center !important;
+}
+.why-photo-card.photo-student-1,
+.why-photo-card.photo-student-2,
+.why-teacher-card {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 220px !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+.why-teacher-card {
+  transform: translateY(-10px) !important;
+}
+.why-photo-card .teacher-photo-wrap,
+.why-teacher-card .teacher-photo-wrap {
+  height: 200px !important;
+}
+.why-photo-card .teacher-photo-wrap img,
+.why-teacher-card .teacher-photo-wrap img {
+  object-fit: cover !important;
+  transform: none !important;
+}
+
+.audience {
+  overflow: visible !important;
+}
+
+.audience-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(9, 36, 92, 0.08) !important;
+  border-color: #ffd0a0 !important;
 }
