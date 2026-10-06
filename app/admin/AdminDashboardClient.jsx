@@ -18,6 +18,7 @@ export default function AdminDashboardClient({ initialData, totalViews = 0 }) {
       Email: user.email,
       Status: user.status,
       'Area of Interest': user.interest,
+      'Batch': user.batch || 'N/A',
       'Ticket ID': user.ticket_id || 'N/A',
       'Ticket Downloaded': user.ticket_downloaded ? 'Yes' : 'No',
       'Registered At': new Date(user.created_at).toLocaleString()
@@ -79,6 +80,7 @@ export default function AdminDashboardClient({ initialData, totalViews = 0 }) {
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Name</th>
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Contact</th>
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Status</th>
+                <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Batch</th>
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Interest</th>
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Ticket Status</th>
                 <th style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', color: '#475569', fontSize: '14px' }}>Date</th>
@@ -93,6 +95,7 @@ export default function AdminDashboardClient({ initialData, totalViews = 0 }) {
                     <div style={{ color: '#64748b', fontSize: '12px' }}>{user.email}</div>
                   </td>
                   <td style={{ padding: '16px 20px', fontSize: '14px', textTransform: 'capitalize' }}>{user.status}</td>
+                  <td style={{ padding: '16px 20px', fontSize: '14px' }}>{user.batch || '-'}</td>
                   <td style={{ padding: '16px 20px', fontSize: '14px' }}>{user.interest || '-'}</td>
                   <td style={{ padding: '16px 20px', fontSize: '14px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

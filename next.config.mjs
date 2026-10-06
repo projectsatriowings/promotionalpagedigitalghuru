@@ -5,7 +5,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/:city(chennai|hyderabad)',
+        source: '/chennai',
         destination: '/',
       },
     ]

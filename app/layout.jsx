@@ -11,8 +11,8 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL('https://digitalghuru.in'),
   title: 'Digital Marketing AI Tools Workshop | Digital Ghuru',
-  description: 'Join Digital Ghuru\'s exclusive AI-powered digital marketing workshop for colleges. Learn to automate workflows, create smarter campaigns, and future-proof your career with cutting-edge AI tools.',
-  keywords: ['Digital Marketing', 'AI Workshop', 'Digital Ghuru', 'AI Tools', 'Marketing Automation', 'College Workshop', 'Chennai', 'Career Transformation', 'Generative AI for Marketing'],
+  description: 'Join Digital Ghuru\'s exclusive AI-powered digital marketing workshop for students, professionals, and institutions. Learn to automate workflows, create smarter campaigns, and future-proof your career with cutting-edge AI tools.',
+  keywords: ['Digital Marketing', 'AI Workshop', 'Digital Ghuru', 'AI Tools', 'Marketing Automation', 'Student Workshop', 'Professionals', 'Chennai', 'Career Transformation', 'Generative AI for Marketing'],
   authors: [{ name: 'Digital Ghuru' }],
   creator: 'Digital Ghuru',
   publisher: 'Digital Ghuru',
@@ -21,7 +21,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Digital Marketing AI Tools Workshop | Digital Ghuru',
-    description: 'Master AI-driven marketing workflows. Book a 2-day hands-on workshop for your campus.',
+    description: 'Master AI-driven marketing workflows. Book a 2-day hands-on workshop for your team or institution.',
     url: 'https://digitalghuru.in/', 
     siteName: 'Digital Ghuru',
     images: [
@@ -38,7 +38,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'AI Digital Marketing Workshop | Digital Ghuru',
-    description: 'Learn to market faster and grow with AI. Future-proof your students digital careers today.',
+    description: 'Learn to market faster and grow with AI. Future-proof your digital career today.',
     images: ['/assets/logo-final dG.webp'],
   },
   robots: {

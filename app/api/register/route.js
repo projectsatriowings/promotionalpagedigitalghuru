@@ -11,7 +11,7 @@ const pool = new Pool({
 export async function POST(req) {
   let client;
   try {
-    const { name, phone, email, status, interest, ticketId } = await req.json();
+    const { name, phone, email, status, interest, batch, ticketId } = await req.json();
 
     client = await pool.connect();
     
@@ -26,18 +26,20 @@ export async function POST(req) {
         interest VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         ticket_downloaded BOOLEAN DEFAULT FALSE,
-        ticket_id VARCHAR(50)
+        ticket_id VARCHAR(50),
+        batch VARCHAR(100)
       )
     `);
     
     // Add columns if they don't exist (for existing tables)
     try { await client.query('ALTER TABLE registrations ADD COLUMN ticket_downloaded BOOLEAN DEFAULT FALSE'); } catch (e) {}
     try { await client.query('ALTER TABLE registrations ADD COLUMN ticket_id VARCHAR(50)'); } catch (e) {}
+    try { await client.query('ALTER TABLE registrations ADD COLUMN batch VARCHAR(100)'); } catch (e) {}
 
     // Insert user
     const result = await client.query(
-      'INSERT INTO registrations (name, phone, email, status, interest, ticket_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
-      [name, phone, email, status, interest, ticketId]
+      'INSERT INTO registrations (name, phone, email, status, interest, batch, ticket_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',
+      [name, phone, email, status, interest, batch, ticketId]
     );
 
     return NextResponse.json({ success: true, id: result.rows[0].id }, { status: 200 });

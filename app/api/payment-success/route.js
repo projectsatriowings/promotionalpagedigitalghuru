@@ -46,6 +46,7 @@ export async function POST(req) {
           <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 30px 0; border: 1px dashed #cbd5e1;">
             <p style="margin: 0 0 10px 0; color: #64748b; font-size: 14px; text-transform: uppercase; font-weight: bold;">Your Ticket ID</p>
             <p style="margin: 0; color: #ff5c00; font-size: 32px; font-weight: 900; letter-spacing: 2px;">#${ticketId}</p>
+            ${user.batch ? `<p style="margin: 15px 0 0 0; color: #64748b; font-size: 16px;"><strong>Batch:</strong> ${user.batch}</p>` : ''}
           </div>
 
           <!-- QR Code Section -->

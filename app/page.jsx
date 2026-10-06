@@ -108,18 +108,19 @@ const MonitorIcon = () => (
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
-    // Set target to Oct 2, 2026, 10:00 AM
-    const targetDate = new Date('2026-10-02T10:00:00+05:30').getTime();
+    setIsClient(true);
+    const targetDate = new Date('2026-10-11T10:00:00+05:30').getTime();
     
-    const interval = setInterval(() => {
+    const updateTime = () => {
       const now = new Date().getTime();
       const distance = targetDate - now;
       
-      if (distance < 0) {
-        clearInterval(interval);
-        return;
+      if (distance <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return true; // Should clear interval
       }
       
       setTimeLeft({
@@ -128,10 +129,32 @@ const CountdownTimer = () => {
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000)
       });
+      return false;
+    };
+
+    updateTime();
+    const interval = setInterval(() => {
+      if (updateTime()) {
+        clearInterval(interval);
+      }
     }, 1000);
     
     return () => clearInterval(interval);
   }, []);
+
+  if (!isClient) {
+    return (
+      <div className="countdown-timer">
+        <div className="countdown-item"><strong>00</strong><span>Days</span></div>
+        <div className="countdown-separator">:</div>
+        <div className="countdown-item"><strong>00</strong><span>Hours</span></div>
+        <div className="countdown-separator">:</div>
+        <div className="countdown-item"><strong>00</strong><span>Mins</span></div>
+        <div className="countdown-separator">:</div>
+        <div className="countdown-item"><strong>00</strong><span>Secs</span></div>
+      </div>
+    );
+  }
   
   return (
     <div className="countdown-timer">
@@ -165,20 +188,14 @@ function Reveal({ children, className = '' }) {
 export default function Home() {
   const [open, setOpen] = useState(null);
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', status: '', interest: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', status: '', interest: '', batch: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [ticketId, setTicketId] = useState('');
   const [registeredId, setRegisteredId] = useState(null);
-  const [city, setCity] = useState('chennai'); // defaults to chennai
 
   useEffect(() => {
     setTicketId(Math.random().toString(36).substr(2, 6).toUpperCase());
     if (typeof window !== 'undefined') {
-      const path = window.location.pathname.toLowerCase();
-      if (path.includes('hyderabad')) {
-        setCity('hyderabad');
-      }
-      
       // Track page view
       fetch('/api/track', {
         method: 'POST',
@@ -335,7 +352,7 @@ export default function Home() {
     ['Who can attend?', 'Students from every department can join - including arts, science, commerce, management, media and engineering. No prior marketing or technical knowledge is needed.', UserProfileIcon],
     ['Will students get a certificate?', 'Yes. Every participant receives a Workshop Participation Certificate after completing the program.', GraduationCapIcon],
     ['Is this a theory-only session?', 'No. The workshop is built around live demonstrations, real-time examples, hands-on exercises and practical AI workflows.', QuestionCircleIcon],
-    ['Can colleges host this for their students?', 'Absolutely. This workshop is specially designed for colleges and educational institutions that want to build future-ready skills on campus.', DocumentIcon],
+    ['Can institutions or individuals join?', 'Absolutely. This workshop is specially designed for educational institutions, professionals, and individuals who want to build future-ready skills.', DocumentIcon],
     ['Do students need to bring their own laptops?', 'While not mandatory, we highly recommend bringing a laptop to fully participate in the hands-on AI tool demonstrations and exercises.', LaptopIcon],
     ['How long is the workshop session?', 'The workshop typically runs for an immersive 4-hour session, divided into foundational concepts and practical, hands-on application segments.', ClockIcon],
     ['Is there any software prerequisite?', 'No special software installation is required. All AI marketing tools demonstrated are web-based and accessible via any standard modern browser.', MonitorIcon]
@@ -344,7 +361,7 @@ export default function Home() {
     <nav className="nav"><a className="brand" href="#top"><img src="/assets/logo-final dG.webp" alt="Digital Ghuru Logo" className="brand-logo-img" /></a><div className="navlinks"><a href="#agenda">Agenda</a><a href="#outcomes">Outcomes</a><a href="#trainer">Why us</a></div><a className="button" href="#register">Register now <Arrow/></a></nav>
 
     <section id="top" className="hero grid-bg">
-      <Reveal className="hero-copy"><p className="eyebrow"><Spark/> for colleges & future builders</p><h1>Make your<br/>students <em>AI-ready.</em></h1><p className="lede">The hands-on Digital Marketing AI Tools Workshop that turns curiosity into career-ready digital confidence.</p><div className="hero-actions"><a className="button" href="#register">Reserve your seat <Arrow/></a><a className="text-link" href="#agenda">Explore the workshop ↓</a></div><div className="trusted"><span className="avatars">✦ &nbsp; ● &nbsp; ✿</span><span>Built for the next generation<br/><b>of digital leaders</b></span></div></Reveal>
+      <Reveal className="hero-copy"><p className="eyebrow"><Spark/> for students, professionals & future builders</p><h1>Built for the next generation<br/><em>of digital leaders.</em></h1><p className="lede">The hands-on Digital Marketing AI Tools Workshop that turns curiosity into career-ready digital confidence.</p><div className="hero-actions"><a className="button" href="#register">Reserve your seat <Arrow/></a><a className="text-link" href="#agenda">Explore the workshop ↓</a></div><div className="trusted"><span className="avatars" style={{ fontSize: '28px' }}>✦ &nbsp; ● &nbsp; ✿</span><span style={{ fontSize: '14px', lineHeight: '1.4' }}>Join a growing community of learners making<br/><b>their careers 100% AI-ready</b></span></div></Reveal>
       <Reveal className="hero-visual modern-photo"><div className="photo-orbit"></div><img src="/assets/hero_banner_image.png" alt="Student exploring the future of AI"/><div className="photo-caption"><Spark/> Career-ready digital skills<br/><b>Start with curiosity.</b></div><div className="photo-stamp">AI<br/><small>READY</small></div></Reveal>
     </section>
 
@@ -358,11 +375,11 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="section problem"><Reveal><p className="eyebrow orange">the gap is real</p><h2>Degrees open doors.<br/><em>Digital fluency</em> opens futures.</h2></Reveal><Reveal className="problem-visual"><div className="problem-art"><img src="/assets/problem-section_image.png" alt="Problem illustration" /></div><div className="problem-side"><p>Today’s students need more than academic knowledge. They need the confidence to use the tools already reshaping how brands, startups and creators work.</p><div className="problem-points"><span>Industry-aware</span><span>Practical</span><span>Career-first</span></div></div></Reveal></section>
+    <section className="section problem"><Reveal><p className="eyebrow orange">the gap is real</p><h2>Degrees open doors.<br/><em>Digital fluency</em> opens futures.</h2></Reveal><Reveal className="problem-visual"><div className="problem-art"><img src="/assets/problem-section_image.png" alt="Problem illustration" /></div><div className="problem-side"><p>Today’s learners and professionals need more than academic knowledge. They need the confidence to use the tools already reshaping how brands, startups and creators work.</p><div className="problem-points"><span>Industry-aware</span><span>Practical</span><span>Career-first</span></div></div></Reveal></section>
 
-    <section className="section promise"><Reveal><div className="label-block">THE WORKSHOP<br/>PROMISE <Spark/></div></Reveal><Reveal><h2>Not another lecture.<br/><em>A launchpad.</em></h2><p className="lede">A beginner-friendly, high-energy experience where students see AI in action, make things themselves and discover where their skills can take them. From first prompt to finished marketing creative, every session gives learners a clear sense of what modern work feels like.</p></Reveal><Reveal className="promise-art"><img src="/assets/workshop_promises_image.png" alt="Digital marketing AI workshop visual"/><span className="image-note">Ideas become<br/><b>work people see.</b></span></Reveal></section>
+    <section className="section promise"><Reveal><div className="label-block">THE WORKSHOP<br/>PROMISE <Spark/></div></Reveal><Reveal><h2>Not another lecture.<br/><em>A launchpad.</em></h2><p className="lede">A beginner-friendly, high-energy experience where you see AI in action, make things yourself and discover where your skills can take you. From first prompt to finished marketing creative, every session gives learners a clear sense of what modern work feels like.</p></Reveal><Reveal className="promise-art"><img src="/assets/workshop_promises_image.png" alt="Digital marketing AI workshop visual"/><span className="image-note">Ideas become<br/><b>work people see.</b></span></Reveal></section>
 
-    <section className="section audience"><Reveal className="audience-photo"><img src="/assets/whos_for_it_image.png" alt="AI workshop programme"/></Reveal><Reveal className="chips"><span>BBA / MBA</span><span>Engineering</span><span>Arts & Science</span><span>Media & Comms</span><span>Commerce</span><span>Entrepreneurs</span><span>Any curious student</span><p>No experience required - just an appetite for what’s next.</p></Reveal><Reveal className="audience-title-block"><p className="eyebrow">made for everyone</p><h2>One room.<br/><em>Every discipline.</em></h2><p className="audience-intro">Students from science, commerce, arts, management and technology bring different perspectives. AI gives them a shared creative language.</p></Reveal></section>
+    <section className="section audience"><Reveal className="audience-photo"><img src="/assets/whos_for_it_image.png" alt="AI workshop programme"/></Reveal><Reveal className="chips"><span>Working Professionals</span><span>Students</span><span>Business Owners</span><span>Entrepreneurs</span><p>No experience required - just an appetite for what’s next.</p></Reveal><Reveal className="audience-title-block"><p className="eyebrow">made for everyone</p><h2>One room.<br/><em>Every discipline.</em></h2><p className="audience-intro">People from science, commerce, arts, management and technology bring different perspectives. AI gives them a shared creative language.</p></Reveal></section>
 
     <section id="agenda" className="section agenda"><Reveal><p className="eyebrow orange">your learning arc</p><h2>Two days. Seven<br/><em>future-forward</em> sessions.</h2></Reveal><div className="days"><div className="day blue"><Reveal className="day-num from-left">01</Reveal><Reveal className="from-bottom"><p className="day-kicker">DAY ONE · FOUNDATIONS</p><h3>Understand the new marketing playbook.</h3><ul><li>Digital Marketing essentials</li><li>AI in modern marketing</li><li>AI content creation tools</li><li>AI design tools & creative workflows</li></ul></Reveal><div className="day-image"><Reveal className="from-right"><img src="/assets/day_1_image.png" alt="Day 1 image"/></Reveal></div></div><div className="day gold"><div></div><Reveal className="from-top"><p className="day-kicker">DAY TWO · MOMENTUM</p><h3>Create, share and see where it can lead.</h3><ul><li>AI video tools demo</li><li>Social media marketing with AI</li><li>Careers, freelancing & entrepreneurship</li></ul></Reveal><Reveal className="day-num from-right" style={{textAlign: 'right'}}>02</Reveal><div className="day-image"><Reveal className="from-left"><img src="/assets/day_2_image.png" alt="Day 2 image"/></Reveal></div></div></div></section>
 
@@ -387,7 +404,7 @@ export default function Home() {
           <div className="outcome">
             <span>02</span>
             <h3>Basic marketing knowledge</h3>
-            <p>Practical exposure students can build on.</p>
+            <p>Practical exposure you can build on.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -395,7 +412,7 @@ export default function Home() {
           <div className="outcome">
             <span>03</span>
             <h3>Creative confidence</h3>
-            <p>Practical exposure students can build on.</p>
+            <p>Practical exposure you can build on.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -403,7 +420,7 @@ export default function Home() {
           <div className="outcome">
             <span>04</span>
             <h3>Career guidance</h3>
-            <p>Practical exposure students can build on.</p>
+            <p>Practical exposure you can build on.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -411,7 +428,7 @@ export default function Home() {
           <div className="outcome">
             <span>05</span>
             <h3>Future-ready digital skills</h3>
-            <p>Practical exposure students can build on.</p>
+            <p>Practical exposure you can build on.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -419,7 +436,7 @@ export default function Home() {
           <div className="outcome">
             <span>06</span>
             <h3>Participation certificate</h3>
-            <p>Practical exposure students can build on.</p>
+            <p>Practical exposure you can build on.</p>
             <b>✦</b>
           </div>
         </Reveal>
@@ -433,10 +450,10 @@ export default function Home() {
             CURRICULUM ARCHITECTURE
           </div>
           <h2 className="bento-section-title">
-            STUDENT LEARNING <em>OUTCOMES</em>
+            YOUR LEARNING <em>OUTCOMES</em>
           </h2>
           <p className="lede" style={{ marginTop: '14px', marginBottom: '38px', maxWidth: '680px' }}>
-            By the end of this workshop, students will be able to master industry-standard AI workflows and digital marketing systems:
+            By the end of this workshop, you will be able to master industry-standard AI workflows and digital marketing systems:
           </p>
         </Reveal>
 
@@ -797,11 +814,34 @@ export default function Home() {
       </div>
       <Reveal>
         <p className="eyebrow orange">save the dates</p>
-        <h2>Give your students<br/>a head start on <em>tomorrow.</em></h2>
+        <h2>Give yourself<br/>a head start on <em>tomorrow.</em></h2>
+        <p className="lede" style={{ color: '#dce9ff', marginTop: '20px', maxWidth: '420px', fontSize: '18px', lineHeight: '1.5' }}>
+          Secure your spot for two days of high-impact learning. Master the AI tools shaping the future of digital marketing and walk away with a portfolio of real-world projects.
+        </p>
+        <div style={{ marginTop: '35px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontSize: '15px', fontWeight: '600' }}>
+            <div style={{ background: 'var(--orange)', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CheckmarkIcon />
+            </div>
+            Intensive hands-on sessions
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontSize: '15px', fontWeight: '600' }}>
+            <div style={{ background: 'var(--orange)', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CheckmarkIcon />
+            </div>
+            Industry-recognized certification
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'white', fontSize: '15px', fontWeight: '600' }}>
+            <div style={{ background: 'var(--orange)', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <CheckmarkIcon />
+            </div>
+            Direct mentorship & networking
+          </div>
+        </div>
       </Reveal>
       <Reveal className="date-card">
         <span>WORKSHOP DATE</span>
-        <strong className="date-gradient-text">02 <i>&</i> 03</strong>
+        <strong className="date-gradient-text">11</strong>
         <b className="date-gradient-text">OCTOBER 2026</b>
         <div style={{ marginTop: '20px' }}>
           <span>STARTS IN</span>
@@ -812,7 +852,7 @@ export default function Home() {
           <div className="date-card-detail">
             <i>
               <img src="/assets/icon-time.svg" alt="Time" style={{ width: '16px', height: '16px' }} />
-            </i> 10 AM to 6 PM
+            </i> Batch 1: 10 AM to 1 PM | Batch 2: 2 PM to 5 PM
           </div>
           <div className="premium-price-box">
             <div className="price-box-left">
@@ -826,13 +866,13 @@ export default function Home() {
             </div>
             <div className="price-divider"></div>
             <div className="price-box-right">
-              <span className="price-strike">₹299</span>
+              <span className="price-strike">₹599</span>
               <span className="price-final">₹199 <small>only</small></span>
             </div>
           </div>
         </div>
-        <p style={{ marginTop: '18px' }}>College workshop · AI-powered digital skills</p>
-        <a className="button" href="#register">Enquire for your college <Arrow/></a>
+        <p style={{ marginTop: '18px' }}>AI-powered digital skills workshop</p>
+        <a className="button" href="#register">Enquire now <Arrow/></a>
       </Reveal>
     </section>
 
@@ -868,9 +908,9 @@ export default function Home() {
         <div className="register-left">
           <Reveal>
             <div className="register-copy">
-              <p className="eyebrow">BRING IT TO YOUR CAMPUS</p>
-              <h2>Let's build<br/><em>future–ready</em><br/>students.</h2>
-              <p className="register-desc">Tell us about your institution and our team will help you plan the right workshop experience.</p>
+              <p className="eyebrow">JOIN THE WORKSHOP</p>
+              <h2>Let's build a<br/><em>future–ready</em><br/>career.</h2>
+              <p className="register-desc">Tell us about yourself or your team and we will help you plan the right workshop experience.</p>
             </div>
           </Reveal>
           
@@ -908,9 +948,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Floating Glass Panel: Campus-to-Career Timeline */}
+            {/* Floating Glass Panel: Learning-to-Career Timeline */}
             <div className="glass-card glass-timeline">
-              <div className="glass-header-small">campus-to-career</div>
+              <div className="glass-header-small">learning-to-career</div>
               <div className="timeline-stepper">
                 <div className="timeline-line"></div>
                 <div className="timeline-step">
@@ -923,7 +963,7 @@ export default function Home() {
                 </div>
                 <div className="timeline-step">
                   <span className="step-dot navy"></span>
-                  <span className="step-text">Campus to Career</span>
+                  <span className="step-text">Learning to Career</span>
                 </div>
               </div>
             </div>
@@ -965,7 +1005,7 @@ export default function Home() {
                               <option value="student">Student</option>
                               <option value="faculty">Faculty / Staff</option>
                               <option value="professional">Working Professional</option>
-                              <option value="administrator">College Administrator</option>
+                              <option value="administrator">Educational Administrator</option>
                               <option value="other">Other</option>
                             </select>
                             <span className="select-chevron">▾</span>
@@ -980,6 +1020,17 @@ export default function Home() {
                               <option value="design">AI for Design & Creativity</option>
                               <option value="tech">Technical / Development</option>
                               <option value="general">General Productivity</option>
+                            </select>
+                            <span className="select-chevron">▾</span>
+                          </div>
+                        </label>
+                        <label>
+                          <span>SELECT BATCH</span>
+                          <div className="select-wrapper">
+                            <select required value={formData.batch} onChange={(e) => setFormData({...formData, batch: e.target.value})}>
+                              <option value="" disabled>Select your batch</option>
+                              <option value="Batch 1 (10 AM to 1 PM)">Batch 1 (10 AM to 1 PM)</option>
+                              <option value="Batch 2 (2 PM to 5 PM)">Batch 2 (2 PM to 5 PM)</option>
                             </select>
                             <span className="select-chevron">▾</span>
                           </div>
@@ -1019,7 +1070,7 @@ export default function Home() {
                     {/* Step 3: Ticket / QR Code */}
                     <div className="register-step ticket-step">
                       <button type="button" className="register-back-btn" onClick={() => {
-                        setFormData({ name: '', phone: '', email: '', status: '', interest: '' });
+                        setFormData({ name: '', phone: '', email: '', status: '', interest: '', batch: '' });
                         setStep(1);
                       }}>
                         ← Register Another
@@ -1034,7 +1085,7 @@ export default function Home() {
                         
                         <div className="ticket-header">
                           <h4>AI Tools Workshop</h4>
-                          <span className="ticket-date">Oct 02-03, 2026</span>
+                          <span className="ticket-date">Oct 11, 2026<br/>{formData.batch || ''}</span>
                         </div>
                         
                         <div className="ticket-qr-container">
@@ -1051,7 +1102,7 @@ export default function Home() {
                         <div className="ticket-details">
                           <div className="ticket-detail">
                             <small>NAME</small>
-                            <strong>{formData.name || 'Student'}</strong>
+                            <strong>{formData.name || 'Learner'}</strong>
                           </div>
                           <div className="ticket-detail">
                             <small>MOBILE</small>
@@ -1213,44 +1264,29 @@ export default function Home() {
 
           <div className="banner-content-layout">
             <div className="banner-side banner-left">
-              {city === 'hyderabad' ? (
-                <div className="banner-address-box">
-                  <strong>Hyderabad Campus</strong>
-                  <p>F8, First Floor, Kallu Compound Rd, Pratap Nagar, Nagarjuna Nagar colony, Yella Reddy Guda, Ameerpet, Hyderabad, Telangana 500073</p>
-                </div>
-              ) : (
-                <div className="banner-address-box">
-                  <strong>Chennai Campus</strong>
-                  <p>Anna Nagar, Chennai,<br/>Tamil Nadu 600040</p>
-                  <a href="https://www.google.com/maps/place/13%C2%B005'01.3%22N+80%C2%B013'05.1%22E/@13.0837012,80.2155025,17z/data=!3m1!4b1!4m4!3m3!8m2!3d13.0837012!4d80.2180774?hl=en&entry=ttu&g_ep=EgoyMDI2MDkyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
-                    Open in Maps ↗
-                  </a>
-                </div>
-              )}
+              <div className="banner-address-box">
+                <strong>Chennai Center</strong>
+                <p>Anna Nagar, Chennai,<br/>Tamil Nadu 600040</p>
+                <a href="https://www.google.com/maps/place/13%C2%B005'01.3%22N+80%C2%B013'05.1%22E/@13.0837012,80.2155025,17z/data=!3m1!4b1!4m4!3m3!8m2!3d13.0837012!4d80.2180774?hl=en&entry=ttu&g_ep=EgoyMDI2MDkyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+                  Open in Maps ↗
+                </a>
+              </div>
             </div>
 
             <div className="banner-text-center">
               <p className="banner-eyebrow">THE FUTURE IS NOT WAITING.</p>
-              <h2 className="banner-heading">Neither should<br />your students.</h2>
+              <h2 className="banner-heading">Neither should<br />your career.</h2>
               <button className="button banner-btn" onClick={() => { document.getElementById('register').scrollIntoView({ behavior: 'smooth' }); }}>
                 Book Now <span className="arrow">↗</span>
               </button>
             </div>
 
             <div className="banner-side banner-right">
-              {city === 'hyderabad' ? (
-                <iframe 
-                  src="https://maps.google.com/maps?q=F8,+First+Floor,+Kallu+Compound+Rd,+Ameerpet,+Hyderabad&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                  width="100%" height="160" style={{border:0, borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)'}} 
-                  allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
-              ) : (
-                <iframe 
-                  src="https://maps.google.com/maps?q=13.0837012,80.2180774&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                  width="100%" height="160" style={{border:0, borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)'}} 
-                  allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
-                </iframe>
-              )}
+              <iframe 
+                src="https://maps.google.com/maps?q=13.0837012,80.2180774&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" height="160" style={{border:0, borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)'}} 
+                allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
+              </iframe>
             </div>
           </div>
 
