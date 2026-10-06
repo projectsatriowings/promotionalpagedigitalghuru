@@ -9,20 +9,30 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL('https://digitalghuru.in'),
+  metadataBase: new URL('https://promotion.digitalghuru.com'),
   title: 'Digital Marketing AI Tools Workshop | Digital Ghuru',
   description: 'Join Digital Ghuru\'s exclusive AI-powered digital marketing workshop for students, professionals, and institutions. Learn to automate workflows, create smarter campaigns, and future-proof your career with cutting-edge AI tools.',
-  keywords: ['Digital Marketing', 'AI Workshop', 'Digital Ghuru', 'AI Tools', 'Marketing Automation', 'Student Workshop', 'Professionals', 'Chennai', 'Career Transformation', 'Generative AI for Marketing'],
+  keywords: [
+    'Digital Marketing Workshop', 'AI Marketing Tools', 'Digital Ghuru', 
+    'Marketing Automation', 'AI Workshop Chennai', 'Generative AI for Marketing', 
+    'Prompt Engineering', 'AI Content Creation', 'Learn AI Marketing', 
+    'Business Owners Marketing', 'Student Career Transformation', 
+    'Social Media AI', 'Offline Workshop Chennai', 'Digital Leaders', 
+    'Future-Proof Career', 'AI for Entrepreneurs'
+  ],
   authors: [{ name: 'Digital Ghuru' }],
   creator: 'Digital Ghuru',
   publisher: 'Digital Ghuru',
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: '/assets/favicon-optimized.png?v=7',
   },
   openGraph: {
     title: 'Digital Marketing AI Tools Workshop | Digital Ghuru',
     description: 'Master AI-driven marketing workflows. Book a 2-day hands-on workshop for your team or institution.',
-    url: 'https://digitalghuru.in/', 
+    url: 'https://promotion.digitalghuru.com/', 
     siteName: 'Digital Ghuru',
     images: [
       {
